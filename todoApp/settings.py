@@ -76,11 +76,18 @@ WSGI_APPLICATION = 'todoApp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'djangoappterraform',
+        'USER': 'admin',
+        'PASSWORD': 'admin1234',
+        'HOST': 'django-app-terraform.c5k460ikwdvs.ap-northeast-1.rds.amazonaws.com',   # RDS endpoint
+        'PORT': '3306',  # MySQL default port
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+        'CONN_MAX_AGE': 600,  # Number of seconds database connections should persist
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
