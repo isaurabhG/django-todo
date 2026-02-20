@@ -2,12 +2,13 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "isaurabhg/todo_app"
+        IMAGE_NAME = "isaurabhg/todo_app:latest"
         K8S_DIR    = "k8s"
         NAMESPACE  = "default"
         SERVICE    = "django-todo"
         LOCAL_PORT = "8080"
-        POD_PORT   = "8080"
+        POD_PORT   = "80"
+        DEPLOYMENT = "django-todo"
     }
 
     stages {
@@ -18,9 +19,12 @@ pipeline {
             }
         }
 
+        // OPTIONAL – remove this stage if Docker perms still fail
         stage('Run Docker Container (Test)') {
             steps {
                 sh '''
+                  docker rm -f myapp-test || true
+                  docker pull $IMAGE_NAME
                   docker run -d --name myapp-test -p 8080:80 $IMAGE_NAME
                   sleep 5
                   docker rm -f myapp-test
@@ -32,7 +36,7 @@ pipeline {
             steps {
                 sh '''
                   kubectl apply -f $K8S_DIR/ -n $NAMESPACE
-                  kubectl rollout status deployment/myapp -n $NAMESPACE
+                  kubectl rollout status deployment/$DEPLOYMENT -n $NAMESPACE
                 '''
             }
         }
