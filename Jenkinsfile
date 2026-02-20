@@ -25,7 +25,7 @@ pipeline {
                 sh '''
                   docker rm -f myapp-test || true
                   docker pull $IMAGE_NAME
-                  docker run -d --name myapp-test -p 8080:80 $IMAGE_NAME
+                  docker run -d --name myapp-test -p 8081:80 $IMAGE_NAME
                   sleep 5
                   docker rm -f myapp-test
                 '''
