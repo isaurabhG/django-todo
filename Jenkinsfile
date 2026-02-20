@@ -14,7 +14,7 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                checkout https://github.com/isaurabhG/django-todo.git
+                git url: 'https://github.com/isaurabhG/django-todo.git', branch: 'develop'
             }
         }
 
