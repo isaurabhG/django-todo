@@ -8,7 +8,7 @@ pipeline {
         SERVICE    = "django-todo"
         LOCAL_PORT = "8080"
         POD_PORT   = "80"
-        DEPLOYMENT = "django-todo"
+        DEPLOYMENT = "django-todo-deployment"
     }
 
     stages {
@@ -19,13 +19,12 @@ pipeline {
             }
         }
 
-        // OPTIONAL – remove this stage if Docker perms still fail
         stage('Run Docker Container (Test)') {
             steps {
                 sh '''
                   docker rm -f myapp-test || true
                   docker pull $IMAGE_NAME
-                  docker run -d --name myapp-test -p 8081:80 $IMAGE_NAME
+                  docker run -d --name myapp-test -p 8081:8000 $IMAGE_NAME
                   sleep 5
                   docker rm -f myapp-test
                 '''
