@@ -7,7 +7,7 @@ pipeline {
         NAMESPACE  = "default"
         SERVICE    = "django-todo"
         LOCAL_PORT = "8080"
-        POD_PORT   = "80"
+        POD_PORT   = "8080"
     }
 
     stages {
