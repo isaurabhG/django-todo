@@ -6,7 +6,7 @@ pipeline {
         K8S_DIR    = "k8s"
         NAMESPACE  = "default"
         SERVICE    = "django-todo"
-        LOCAL_PORT = "8080"
+        LOCAL_PORT = "8081"
         POD_PORT   = "80"
         DEPLOYMENT = "django-todo-deployment"
     }
