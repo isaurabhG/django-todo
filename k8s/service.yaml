@@ -5,10 +5,8 @@ metadata:
 spec:
   selector:
     app: django-todo
-  type: NodePort
+  type: ClusterIP
   ports:
     - protocol: TCP
-      port: 8000        # service port inside cluster
-      targetPort: 8000  # pod port
-      nodePort: 30080   # port on localhost
-
+      port: 80        # service port
+      targetPort: 8000  # container port
